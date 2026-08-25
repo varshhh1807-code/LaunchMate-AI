@@ -1,8 +1,6 @@
 import "./Login.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
 function Login() {
 const [email, setEmail] = useState("");
@@ -11,24 +9,38 @@ const navigate = useNavigate();
 
 const handleLogin = async () => {
   try {
-    await signInWithEmailAndPassword(auth, email, password);
-    alert("Login Successful!");
-    navigate("/dashboard");
+    const response = await fetch("http://127.0.0.1:8000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: email,
+        password: password,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (data.message === "Login Successful") {
+      alert("Login Successful!");
+      navigate("/dashboard");
+    } else {
+      alert(data.message);
+    }
   } catch (error) {
-    alert(error.message);
+    alert("Server Error");
+    console.log(error);
   }
 };
+
   return (
     <div className="login-container">
       <div className="login-box">
 
         <div className="title">LaunchMate AI</div>
         <div className="subtitle">Your Intelligent Startup Co-Founder</div>
-        <img
-          className="user-icon"
-          src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-          alt="User"
-        />
+        
 
         <h2>Login</h2>
 

@@ -1,8 +1,7 @@
 import "./Login.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
+
 
 function Signup() {
   const [name, setName] = useState("");
@@ -10,13 +9,27 @@ function Signup() {
   const [password, setPassword] = useState("");
 
   const handleSignup = async () => {
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      alert("Account Created Successfully!");
-    } catch (error) {
-      alert(error.message);
-    }
-  };
+  try {
+    const response = await fetch("http://127.0.0.1:8000/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: email,
+        password: password,
+      }),
+    });
+
+    const data = await response.json();
+
+    alert(data.message);
+
+  } catch (error) {
+    alert("Server Error");
+    console.log(error);
+  }
+};
 
   return (
     <div className="login-container">
