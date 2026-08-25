@@ -18,9 +18,9 @@ function IdeaGenerator() {
       return;
     }
 
-    setLoading(true);
-
     try {
+      setLoading(true);
+
       const topic = `${idea} | Category: ${category} | Audience: ${audience} | Business Model: ${businessModel}`;
 
       const response = await fetch(
@@ -29,22 +29,23 @@ function IdeaGenerator() {
 
       const data = await response.json();
 
+      console.log("DATA =", data);
+
       if (data.error) {
         alert(data.error);
       } else {
-        setResult(data.idea);
+        setResult(data.idea || "");
       }
     } catch (error) {
       console.error(error);
       alert("Failed to generate idea");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
     <div className="idea-container">
-
       <div className="navigation-buttons">
         <button
           className="back-btn"
@@ -109,15 +110,19 @@ function IdeaGenerator() {
       <div className="result-box">
         <h2>✨ AI Generated Result</h2>
 
-        <div className="result-card">
-          <pre
-            style={{
-              whiteSpace: "pre-wrap",
-              wordBreak: "break-word"
-            }}
-          >
-            {result}
-          </pre>
+        <div
+          style={{
+            background: "#fff",
+            color: "#000",
+            border: "1px solid #ccc",
+            borderRadius: "10px",
+            padding: "15px",
+            minHeight: "400px",
+            whiteSpace: "pre-wrap",
+            overflowY: "auto",
+          }}
+        >
+          {result || "Generated idea will appear here..."}
         </div>
       </div>
     </div>

@@ -5,9 +5,11 @@ from google import genai
 load_dotenv()
 
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+for model in client.models.list():
+    print(model.name)
 
 # Available models print avuthayi
-print("\n===== AVAILABLE MODELS =====")
+print("\n=====AVAILABLE MODELS =====")
 for model in client.models.list():
     print(model.name)
 print("============================\n")
@@ -27,7 +29,7 @@ Topic: {topic}
 """
 
     response = client.models.generate_content(
-        model="gemini-flash-latest",
+        model="gemini-3.5-flash-lite",
         contents=prompt,
     )
 

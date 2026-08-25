@@ -11,10 +11,12 @@ client = genai.Client(api_key=key)
 def ask_gemini(question):
     try:
         response = client.models.generate_content(
-            model="gemini-2.5-flash",
+            model="gemini-3.5-flash-lite",
             contents=question,
         )
+
         return response.text
+
     except Exception as e:
         print("ERROR:", e)
         return str(e)

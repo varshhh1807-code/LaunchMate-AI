@@ -12,7 +12,7 @@ from business_agent import business_plan
 from finance_agent import finance_analysis
 from marketing_agent import marketing_strategy
 from mentor_agent import mentor_advice
-
+from legal_agent import legal_guide
 from report_generator import generate_report
 from pdf_generator import generate_pdf
 
@@ -138,7 +138,21 @@ def mentor(startup_idea: str):
             "error": str(e)
         }
 
+@app.get("/legal")
+def legal(startup_idea: str):
+    try:
+        result = legal_guide(startup_idea)
 
+        return {
+            "startup_idea": startup_idea,
+            "legal_report": result
+        }
+
+    except Exception as e:
+        return {
+            "error": str(e)
+        }
+    
 @app.get("/report")
 def report(startup_idea: str):
     try:
