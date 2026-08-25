@@ -44,7 +44,7 @@ if st.button("Generate Complete Report"):
         st.write(finance)
 
         st.header("📢 Marketing Strategy")
-        st.write(marketing)
+        st.write(marketing)dir strea
 
         st.header("🧠 Mentor Advice")
         st.write(mentor)
