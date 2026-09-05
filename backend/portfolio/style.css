@@ -1,0 +1,33 @@
+body{
+    background-color:#333;
+    margin:0;
+    padding:0;
+    font-family:Arial sans-serif;
+}
+header{
+    padding:20px;
+    background-color:#333;
+    color:white;
+    text-align:center;
+}
+section{
+    background-color:white;
+    margin:20px;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 0 5px gray;
+}
+ul{
+    list-style-type:square;
+}
+li{
+    margin:5px 0;
+}
+footer{
+    padding:15px;
+    background-color:#333;
+    color:white;
+    text-align:center;
+    margin-top:20px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
